@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var TILESIZE = 64
-@export var speed = TILESIZE * 2
+@export var speed = TILESIZE * 1.5
 var movement_state = "idle"
 var facing = "-down"
 var anim_speed = 1.5
@@ -16,9 +16,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	if movement_state == "idle" and randf() > 0.998:
+	if movement_state == "idle" and randf() > 0.997:
 		var directions = ["up","down","left","right"]
 		move_distance(randi_range(1,4), directions[randi_range(0,3)])
+
+func _ready() -> void:
+	$AnimatedSprite2D.play("idle-down")
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
