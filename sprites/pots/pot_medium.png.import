@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqw7xb1xosvh7"
-path="res://.godot/imported/sarracenia_leucophylla.png-312308938cb571b7cbe68d7b1b05fbb3.ctex"
+uid="uid://cvsbyiqg5uvwi"
+path="res://.godot/imported/pot_medium.png-8973d667c1a48be54f61154ee347a01a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/plants/sarracenia_leucophylla.png"
-dest_files=["res://.godot/imported/sarracenia_leucophylla.png-312308938cb571b7cbe68d7b1b05fbb3.ctex"]
+source_file="res://sprites/pots/pot_medium.png"
+dest_files=["res://.godot/imported/pot_medium.png-8973d667c1a48be54f61154ee347a01a.ctex"]
 
 [params]
 

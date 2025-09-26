@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brpat70c2rqq3"
-path="res://.godot/imported/magnolia_virginiana.png-ec870b490981f51e2881b58ab0719862.ctex"
+uid="uid://ib5squjbx2aj"
+path="res://.godot/imported/rudbeckia-hirta.png-036cb97c39233211825ea15b557c3756.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/plants/magnolia_virginiana.png"
-dest_files=["res://.godot/imported/magnolia_virginiana.png-ec870b490981f51e2881b58ab0719862.ctex"]
+source_file="res://sprites/plants/rudbeckia-hirta.png"
+dest_files=["res://.godot/imported/rudbeckia-hirta.png-036cb97c39233211825ea15b557c3756.ctex"]
 
 [params]
 

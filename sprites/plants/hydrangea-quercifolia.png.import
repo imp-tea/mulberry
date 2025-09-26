@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0lntkna8466g"
-path="res://.godot/imported/hibiscus_moscheutos.png-527a772629d5429f59f5fd71519bcb20.ctex"
+uid="uid://b1guls4g5fdvb"
+path="res://.godot/imported/hydrangea-quercifolia.png-bf7319b533fd3f7aa6dc974387a782aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/plants/hibiscus_moscheutos.png"
-dest_files=["res://.godot/imported/hibiscus_moscheutos.png-527a772629d5429f59f5fd71519bcb20.ctex"]
+source_file="res://sprites/plants/hydrangea-quercifolia.png"
+dest_files=["res://.godot/imported/hydrangea-quercifolia.png-bf7319b533fd3f7aa6dc974387a782aa.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l570dydb5etx"
-path="res://.godot/imported/echinacea_purpurea.png-91179807684a976020698de654356f42.ctex"
+uid="uid://c6cpt4wclpvq5"
+path="res://.godot/imported/pot_large.png-8a28c71c3623926dcc44ff53665a6340.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/plants/echinacea_purpurea.png"
-dest_files=["res://.godot/imported/echinacea_purpurea.png-91179807684a976020698de654356f42.ctex"]
+source_file="res://sprites/pots/pot_large.png"
+dest_files=["res://.godot/imported/pot_large.png-8a28c71c3623926dcc44ff53665a6340.ctex"]
 
 [params]
 

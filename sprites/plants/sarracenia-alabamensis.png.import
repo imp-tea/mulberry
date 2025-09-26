@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1xwo2jnpvqn8"
-path="res://.godot/imported/muhlenbergia_capillaris.png-13fdfc3e97188323628a5b490e8b8fa7.ctex"
+uid="uid://cmgfe433of0dk"
+path="res://.godot/imported/sarracenia-alabamensis.png-3773fb95eaa96b8be8e0641800ade616.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/plants/muhlenbergia_capillaris.png"
-dest_files=["res://.godot/imported/muhlenbergia_capillaris.png-13fdfc3e97188323628a5b490e8b8fa7.ctex"]
+source_file="res://sprites/plants/sarracenia-alabamensis.png"
+dest_files=["res://.godot/imported/sarracenia-alabamensis.png-3773fb95eaa96b8be8e0641800ade616.ctex"]
 
 [params]
 
