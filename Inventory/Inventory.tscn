@@ -30,9 +30,8 @@ columns = 6
 [node name="Tooltip" parent="." instance=ExtResource("2_orgsn")]
 visible = false
 layout_mode = 0
-offset_left = -19.829147
-offset_top = -42.596283
-offset_right = -19.829147
-offset_bottom = 21.403717
+offset_left = -129.3519
+offset_top = -136.33948
+offset_right = -129.3519
+offset_bottom = -72.33952
 mouse_filter = 2
-color = Color(0, 0, 0, 1)

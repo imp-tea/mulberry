@@ -27,13 +27,15 @@ func _ready():
 
 # When slot is pressed
 func _on_texture_button_gui_input(event):
-	print("_on_texture_button_gui_input")
+	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
+			print("left")
 			slot_input.emit(
 				self, InventorySlotAction.SELECT
 			)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			print("right")
 			slot_input.emit(
 				self, InventorySlotAction.SPLIT
 			)
@@ -91,9 +93,6 @@ func remove_item():
 	item.free()
 	item = null
 	update_slot()
-
-
-
 
 # Removes item from slot and returns it.
 func select_item() -> InventoryItem:

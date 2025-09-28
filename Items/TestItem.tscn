@@ -8,7 +8,7 @@ radius = 16.03122
 
 [node name="TestItem" type="Area2D" groups=["items"]]
 script = ExtResource("1_2ugo5")
-item_name = "TestItem"
+item_name = "Brown Eyed Susans"
 icon = ExtResource("2_1jf17")
 is_stackable = true
 

@@ -16,4 +16,16 @@ position = Vector2(672, 352)
 position = Vector2(320, 320)
 
 [node name="TestItem" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(535, 237)
+position = Vector2(424, 190)
+
+[node name="TestItem2" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(448, 445)
+
+[node name="TestItem3" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(635, 233)
+
+[node name="TestItem4" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(646, 400)
+
+[node name="TestItem5" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(482, 325)

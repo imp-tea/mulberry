@@ -25,8 +25,8 @@ func _ready():
 		var slot = inventory_slot_scene.instantiate()
 		slots.append(slot)
 		inventory_grid.add_child(slot)
-		#slot.slot_input.connect(self._on_slot_input) # binding not necessary as
-		#slot.slot_hovered.connect(self._on_slot_hovered) # it does while emit() call
+		slot.slot_input.connect(self._on_slot_input) # binding not necessary as
+		slot.slot_hovered.connect(self._on_slot_hovered) # it does while emit() call
 	tooltip.visible = false
 
 
