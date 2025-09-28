@@ -5,6 +5,7 @@ var movement_state = "idle"
 var facing = "-down"
 var anim_speed = 1.5
 @export var speed = TILESIZE*2
+@export var inventory: Inventory
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -24,7 +25,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("ui_home"):
+		inventory.visible = not inventory.visible
+		print("inventory toggled")
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
@@ -44,3 +47,13 @@ func input_to_dir(input:Vector2):
 		return "-up"
 	else:
 		return "-up-right"
+
+func _on_area_2d_body_entered(body):
+	if body in get_tree().get_nodes_in_group("items"):
+		self.inventory.add_item(body as Item, 1)
+
+
+func _on_area_2d_area_entered(area):
+	if area in get_tree().get_nodes_in_group("items"):
+		self.inventory.add_item(area as Item, 1)
+		print("item touched")

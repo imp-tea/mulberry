@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5ncbmkgn301w"]
+
+[ext_resource type="Script" uid="uid://crxxgxh32ci15" path="res://Inventory/Inventory.gd" id="1_xjbm4"]
+[ext_resource type="PackedScene" uid="uid://c5p4rigv0dh2" path="res://Inventory/InventorySlot/InventorySlot.tscn" id="2_nednh"]
+[ext_resource type="PackedScene" uid="uid://u61ihnr4k620" path="res://Inventory/Tooltip/Tooltip.tscn" id="2_orgsn"]
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("inventory_grid", "tooltip")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xjbm4")
+inventory_grid = NodePath("GridContainer")
+inventory_slot_scene = ExtResource("2_nednh")
+tooltip = NodePath("Tooltip")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
+
+[node name="Tooltip" parent="." instance=ExtResource("2_orgsn")]
+visible = false
+layout_mode = 0
+offset_left = -19.829147
+offset_top = -42.596283
+offset_right = -19.829147
+offset_bottom = 21.403717
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

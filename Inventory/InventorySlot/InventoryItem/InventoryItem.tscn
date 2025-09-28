@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://clum64wvxgitr"]
+
+[ext_resource type="Script" uid="uid://bgyg58l471mij" path="res://Inventory/InventorySlot/InventoryItem/InventoryItem.gd" id="1_5wodm"]
+
+[node name="InventoryItem" type="Control" node_paths=PackedStringArray("sprite", "label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5wodm")
+sprite = NodePath("Sprite2D")
+label = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
