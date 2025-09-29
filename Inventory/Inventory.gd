@@ -44,16 +44,24 @@ func _process(delta):
 
 
 func _on_slot_input(which: InventorySlot, action: InventorySlot.InventorySlotAction):
+	print("action:")
 	print(action)
 	# Select/deselect items
 	if not selected_item:
+		print("No item selected.")
 		# Spliting only occurs if not item selected already
 		if action == InventorySlot.InventorySlotAction.SELECT:
 			selected_item = which.select_item()
+			if selected_item:
+				print("Item selected: "+selected_item.name)
 		elif action == InventorySlot.InventorySlotAction.SPLIT:
 			selected_item = which.split_item() # Split means selecting half amount
+			if selected_item:
+				print("Item split: "+selected_item.name)
 	else:
 		selected_item = which.deselect_item(selected_item)
+		if selected_item:
+			print("Item selected: " + selected_item.name)
 
 
 

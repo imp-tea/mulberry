@@ -43,13 +43,11 @@ func _on_texture_button_gui_input(event):
 
 
 func _on_texture_button_mouse_entered():
-	print("_on_texture_button_mouse_entered")
 	slot_hovered.emit(self, true)
 
 
 
 func _on_texture_button_mouse_exited():
-	print("_on_texture_button_mouse_exited")
 	slot_hovered.emit(self, false)
 
 
@@ -150,7 +148,7 @@ func split_item() -> InventoryItem:
 		new_item.amount = self.item.amount / 2
 		self.item.amount -= new_item.amount
 		inventory.add_child(new_item)
-		new_item.z_index = 128
+		new_item.z_index = 129
 		return new_item
 	elif self.item.amount == 1:
 		return self.select_item()
@@ -179,8 +177,8 @@ func update_slot():
 		if not self.get_children().has(item):
 			add_child(item)
 		#item.sprite.texture = item.icon
-		#item.label.text = str(item.amount) + " - " + str(item.name)
-		# If amount ios 0, make iot semi-transparent
+		item.label.text = str(item.amount) + " - " + str(item.name)
+		# If amount is 0, make it semi-transparent
 		if item.amount < 1:
 			item.fade()
 	if hint_item:

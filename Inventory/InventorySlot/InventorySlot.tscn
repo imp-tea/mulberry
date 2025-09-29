@@ -9,6 +9,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.13319641, 0.13319641, 0.13319638, 1)
 gradient = SubResource("Gradient_8yve6")
 
 [node name="InventorySlot" type="CenterContainer"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,6 +19,8 @@ script = ExtResource("1_4r0iv")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 2
+action_mode = 0
+button_mask = 3
 texture_normal = SubResource("GradientTexture2D_vet7t")
 
 [connection signal="gui_input" from="TextureButton" to="." method="_on_texture_button_gui_input"]

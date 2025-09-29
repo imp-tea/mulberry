@@ -1,31 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bptkema0gehhu"]
+[gd_scene load_steps=6 format=3 uid="uid://bptkema0gehhu"]
 
 [ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://shop.tscn" id="1_udxuc"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://w7ucpreej0io" path="res://customer.tscn" id="3_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://od6722h7nvpk" path="res://Items/TestItem.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://dotmt7bn8j02q" path="res://Items/canebrake_pitcher_plant.tscn" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://od6722h7nvpk" path="res://Items/brown_eyed_susan.tscn" id="5_dwbse"]
 
 [node name="World" type="Node2D"]
 
 [node name="shop" parent="." instance=ExtResource("1_udxuc")]
 
 [node name="customer" parent="." instance=ExtResource("3_aqk2v")]
+texture_filter = 1
 position = Vector2(672, 352)
 
 [node name="player" parent="." instance=ExtResource("2_tlwt5")]
+texture_filter = 1
 position = Vector2(320, 320)
 
-[node name="TestItem" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(424, 190)
+[node name="Canebrake Pitcher Plant" parent="." instance=ExtResource("4_036b0")]
+position = Vector2(428, 253)
 
-[node name="TestItem2" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(448, 445)
+[node name="Canebrake Pitcher Plant2" parent="." instance=ExtResource("4_036b0")]
+position = Vector2(702, 248)
 
-[node name="TestItem3" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(635, 233)
+[node name="Brown-Eyed Susan" parent="." instance=ExtResource("5_dwbse")]
+position = Vector2(363, 401)
 
-[node name="TestItem4" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(646, 400)
-
-[node name="TestItem5" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(482, 325)
+[node name="Brown-Eyed Susan2" parent="." instance=ExtResource("5_dwbse")]
+position = Vector2(587, 420)

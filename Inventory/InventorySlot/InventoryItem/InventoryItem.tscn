@@ -1,19 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://clum64wvxgitr"]
+[gd_scene load_steps=5 format=3 uid="uid://clum64wvxgitr"]
 
 [ext_resource type="Script" uid="uid://bgyg58l471mij" path="res://Inventory/InventorySlot/InventoryItem/InventoryItem.gd" id="1_5wodm"]
+[ext_resource type="Texture2D" uid="uid://q70httxuu1ah" path="res://icon.svg" id="2_qr6jv"]
+
+[sub_resource type="FontFile" id="FontFile_gs78a"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gs78a"]
+font = SubResource("FontFile_gs78a")
+font_color = Color(0.9955804, 0.99558026, 0.99558026, 1)
 
 [node name="InventoryItem" type="Control" node_paths=PackedStringArray("sprite", "label")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_5wodm")
 sprite = NodePath("Sprite2D")
 label = NodePath("Label")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("2_qr6jv")
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+offset_left = 19.0
+offset_top = 12.0
+offset_right = 140.0
+offset_bottom = 35.0
+text = " "
+label_settings = SubResource("LabelSettings_gs78a")
