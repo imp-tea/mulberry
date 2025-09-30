@@ -9,12 +9,13 @@ class_name InventoryItem
 
 
 
-func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int):
+func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int, _is_placebale:bool):
 	self.item_name = _name
 	self.name = _name
 	self.icon = _icon
 	self.is_stackable = _is_stackable
 	self.amount = _amount
+	self.is_placeable = _is_placebale
 
 
 

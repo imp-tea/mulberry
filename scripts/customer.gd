@@ -12,10 +12,10 @@ func move_distance(dist:int, dir:String):
 	var move_time = (float(dist)*float(TILESIZE))/float(speed)
 	emit_signal("start_moving", move_time, dir)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if movement_state == "idle" and randf() > 0.997:
 		var directions = ["up","down","left","right"]
 		move_distance(randi_range(1,4), directions[randi_range(0,3)])
@@ -48,7 +48,7 @@ func _on_stop_moving() -> void:
 	$AnimatedSprite2D.play(movement_state+"-"+facing)
 
 func _on_start_moving(time:float, dir:String) -> void:
-	var movement_timer = get_tree().create_timer(time, true).timeout.connect(_on_stop_moving)
+	get_tree().create_timer(time, true).timeout.connect(_on_stop_moving)
 	var dir_vec = Vector2.ZERO
 	if dir == "up":
 		dir_vec.y = -1

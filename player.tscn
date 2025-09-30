@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://b1u8aeitfgsq8"]
+[gd_scene load_steps=87 format=3 uid="uid://b1u8aeitfgsq8"]
 
 [ext_resource type="Script" uid="uid://bgagust6h1lja" path="res://scripts/player.gd" id="1_op7ga"]
 [ext_resource type="Texture2D" uid="uid://b0b4rj7st4yk7" path="res://sprites/actors/player/idle_down.png" id="1_u1c27"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://esd4fgdghaeh" path="res://sprites/actors/player/walk_up_left.png" id="15_j5n4i"]
 [ext_resource type="Texture2D" uid="uid://bpqio6nrin8qy" path="res://sprites/actors/player/walk_up_right.png" id="16_634y6"]
 [ext_resource type="PackedScene" uid="uid://b5ncbmkgn301w" path="res://Inventory/Inventory.tscn" id="18_q13i1"]
+[ext_resource type="PackedScene" uid="uid://dultfmxyxwfn7" path="res://camera.tscn" id="19_pylmc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q13i1"]
 radius = 11.0
@@ -559,6 +560,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("inventory")]
+motion_mode = 1
 script = ExtResource("1_op7ga")
 inventory = NodePath("CanvasLayer/Inventory")
 
@@ -590,5 +592,8 @@ grow_vertical = 2
 sprite_frames = SubResource("SpriteFrames_kcilg")
 animation = &"walk-down"
 offset = Vector2(-1, 0)
+
+[node name="Camera" parent="." instance=ExtResource("19_pylmc")]
+position_smoothing_enabled = false
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

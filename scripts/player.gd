@@ -4,6 +4,8 @@ var TILESIZE = 64
 var movement_state = "idle"
 var facing = "-down"
 var anim_speed = 1.5
+var inventory_open = false
+var current_hotbar_slot = 0
 @export var speed = TILESIZE*2
 @export var inventory: Inventory
 
@@ -25,9 +27,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_home"):
+	if Input.is_action_just_pressed("toggle_inventory"):
 		inventory.visible = not inventory.visible
-		print("inventory toggled")
+		inventory_open = not inventory_open
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()

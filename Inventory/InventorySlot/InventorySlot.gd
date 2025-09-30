@@ -27,15 +27,12 @@ func _ready():
 
 # When slot is pressed
 func _on_texture_button_gui_input(event):
-	
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			print("left")
 			slot_input.emit(
 				self, InventorySlotAction.SELECT
 			)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			print("right")
 			slot_input.emit(
 				self, InventorySlotAction.SPLIT
 			)
@@ -143,7 +140,8 @@ func split_item() -> InventoryItem:
 		var new_item: InventoryItem = inventory_item_scene.instantiate()
 		new_item.set_data(
 			self.item.item_name, self.item.icon,
-			self.item.is_stackable, self.item.amount
+			self.item.is_stackable, self.item.amount,
+			self.item.is_placeable
 		) # Because .duplicate() is buggy (doesnt make it unique0 thats why duplicating via this way
 		new_item.amount = self.item.amount / 2
 		self.item.amount -= new_item.amount

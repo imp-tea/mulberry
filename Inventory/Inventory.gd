@@ -44,24 +44,15 @@ func _process(delta):
 
 
 func _on_slot_input(which: InventorySlot, action: InventorySlot.InventorySlotAction):
-	print("action:")
-	print(action)
 	# Select/deselect items
 	if not selected_item:
-		print("No item selected.")
 		# Spliting only occurs if not item selected already
 		if action == InventorySlot.InventorySlotAction.SELECT:
 			selected_item = which.select_item()
-			if selected_item:
-				print("Item selected: "+selected_item.name)
 		elif action == InventorySlot.InventorySlotAction.SPLIT:
 			selected_item = which.split_item() # Split means selecting half amount
-			if selected_item:
-				print("Item split: "+selected_item.name)
 	else:
 		selected_item = which.deselect_item(selected_item)
-		if selected_item:
-			print("Item selected: " + selected_item.name)
 
 
 
@@ -84,7 +75,7 @@ func _on_slot_hovered(which: InventorySlot, is_hovering: bool):
 func add_item(item: Item, amount: int) -> void:
 	var _item: InventoryItem = inventory_item_scene.instantiate() # Duplicate
 	_item.set_data(
-		item.item_name, item.icon, item.is_stackable, amount
+		item.item_name, item.icon, item.is_stackable, amount, item.is_placeable
 	)
 	item.queue_free() # Consume the item by inventory (by the end of frame)
 	if item.is_stackable:
