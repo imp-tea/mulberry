@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-PlayerVariables="*res://scripts/player_variables.gd"
+GlobalSettings="*res://Globals/GlobalSettings.gd"
+PlayerVariables="*res://Globals/PlayerVariables.gd"
+SignalBus="*res://Globals/SignalBus.gd"
 
 [display]
 

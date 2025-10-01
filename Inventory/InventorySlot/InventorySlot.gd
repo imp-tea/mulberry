@@ -3,7 +3,6 @@ class_name InventorySlot
 
 # So its copy can be instanced while splitting
 @export var inventory_item_scene: PackedScene = preload("res://Inventory/InventorySlot/InventoryItem/InventoryItem.tscn")
-
 @export var item: InventoryItem
 @export var hint_item: InventoryItem = null
 

@@ -20,7 +20,6 @@ func get_input():
 		facing = input_to_dir(input_direction)
 		$AnimatedSprite2D.speed_scale = anim_speed
 	$AnimatedSprite2D.play(movement_state+facing)
-	
 
 func _physics_process(delta):
 	get_input()
@@ -62,8 +61,6 @@ func _on_area_2d_body_entered(body):
 	if body in get_tree().get_nodes_in_group("items"):
 		self.inventory.add_item(body as Item, 1)
 
-
 func _on_area_2d_area_entered(area):
 	if area in get_tree().get_nodes_in_group("items"):
 		self.inventory.add_item(area as Item, 1)
-		print("item touched")
