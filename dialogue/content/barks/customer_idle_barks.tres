@@ -1,0 +1,41 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource path="res://dialogue/resources/ambient_bark_set.gd" type="Script" id="1"]
+[ext_resource path="res://dialogue/resources/ambient_bark.gd" type="Script" id="2"]
+[ext_resource path="res://dialogue/resources/dialogue_snippet.gd" type="Script" id="3"]
+
+[sub_resource type="Resource" id="SnippetWeather"]
+script = ExtResource("3")
+id = "weather_hint"
+text = "Smells like rain rolling off the ridge."
+
+[sub_resource type="Resource" id="SnippetStock"]
+script = ExtResource("3")
+id = "stock_reminder"
+text = "These jars aren't going to dust themselves."
+
+[sub_resource type="Resource" id="BarkWeather"]
+script = ExtResource("2")
+id = "customer_weather"
+priority = 0
+weight = 1.0
+cooldown_seconds = 25.0
+snippets = [SubResource("SnippetWeather")]
+tags = ["ambient"]
+
+[sub_resource type="Resource" id="BarkStock"]
+script = ExtResource("2")
+id = "customer_stock"
+priority = 0
+weight = 1.2
+cooldown_seconds = 30.0
+snippets = [SubResource("SnippetStock")]
+tags = ["ambient"]
+
+[resource]
+script = ExtResource("1")
+set_id = "customer_idle"
+label = "Customer Idle Barks"
+default_cooldown = 20.0
+barks = [SubResource("BarkWeather"), SubResource("BarkStock")]
+

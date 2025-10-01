@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GlobalSettings="*res://Globals/GlobalSettings.gd"
 PlayerVariables="*res://Globals/PlayerVariables.gd"
 SignalBus="*res://Globals/SignalBus.gd"
+DialogueService="*res://dialogue/core/dialogue_service.gd"
 
 [display]
 

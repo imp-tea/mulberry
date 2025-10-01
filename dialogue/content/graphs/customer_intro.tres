@@ -1,0 +1,95 @@
+[gd_resource type="Resource" load_steps=13 format=3]
+
+[ext_resource path="res://dialogue/resources/dialogue_graph.gd" type="Script" id="1"]
+[ext_resource path="res://dialogue/resources/dialogue_line_node.gd" type="Script" id="2"]
+[ext_resource path="res://dialogue/resources/dialogue_choice_node.gd" type="Script" id="3"]
+[ext_resource path="res://dialogue/resources/dialogue_choice_option.gd" type="Script" id="4"]
+[ext_resource path="res://dialogue/resources/dialogue_end_node.gd" type="Script" id="5"]
+[ext_resource path="res://dialogue/resources/dialogue_snippet.gd" type="Script" id="6"]
+[ext_resource path="res://dialogue/effects/set_property_effect.gd" type="Script" id="7"]
+
+[sub_resource type="Resource" id="SnippetIntro"]
+script = ExtResource("6")
+id = "customer_intro_line"
+text = "Oh hi there! It's rare to see new faces in the shop."
+
+after_display_effects = []
+after_input_effects = []
+
+[sub_resource type="Resource" id="SnippetHelp"]
+script = ExtResource("6")
+id = "customer_help_line"
+text = "Actually, yes! Could you restock the front shelf when you have a minute?"
+
+[sub_resource type="Resource" id="SnippetDay"]
+script = ExtResource("6")
+id = "customer_day_line"
+text = "Quiet so far, but the breeze smells like rain."
+
+[sub_resource type="Resource" id="EffectStartQuest"]
+script = ExtResource("7")
+id = "effect_start_restock"
+property_path = "global.quests.restock"
+operation = "set"
+value = "started"
+fire_event = "quest_started"
+event_payload = {"quest_id": "restock_front_shelf"}
+
+[sub_resource type="Resource" id="ChoiceHelp"]
+script = ExtResource("4")
+id = "opt_help"
+text = "Do you need any help?"
+next_id = "line_help"
+on_select_effects = [SubResource("EffectStartQuest")]
+
+[sub_resource type="Resource" id="ChoiceDay"]
+script = ExtResource("4")
+id = "opt_day"
+text = "How's your day going?"
+next_id = "line_day"
+
+[sub_resource type="Resource" id="NodeIntro"]
+script = ExtResource("2")
+id = "line_intro"
+speaker_id = "customer"
+address_to = "player"
+snippets = [SubResource("SnippetIntro")]
+next_id = "choice_intro"
+
+[sub_resource type="Resource" id="NodeChoice"]
+script = ExtResource("3")
+id = "choice_intro"
+options = [SubResource("ChoiceHelp"), SubResource("ChoiceDay")]
+auto_choose_single = false
+allow_skip = false
+
+[sub_resource type="Resource" id="NodeHelp"]
+script = ExtResource("2")
+id = "line_help"
+speaker_id = "customer"
+address_to = "player"
+snippets = [SubResource("SnippetHelp")]
+next_id = "line_end"
+
+[sub_resource type="Resource" id="NodeDay"]
+script = ExtResource("2")
+id = "line_day"
+speaker_id = "customer"
+address_to = "player"
+snippets = [SubResource("SnippetDay")]
+next_id = "line_end"
+
+[sub_resource type="Resource" id="NodeEnd"]
+script = ExtResource("5")
+id = "line_end"
+conversation_log_label = "Customer Intro"
+
+[resource]
+script = ExtResource("1")
+graph_id = "customer_intro"
+entry_node_id = "line_intro"
+title = "Customer First Meeting"
+description = "Initial greeting conversation with the general store customer."
+nodes = [SubResource("NodeIntro"), SubResource("NodeChoice"), SubResource("NodeHelp"), SubResource("NodeDay"), SubResource("NodeEnd")]
+metadata = {"actor_id": "customer"}
+
