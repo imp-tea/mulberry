@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 Global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/player_variables.gd"
 
+[display]
+
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
+
 [global_group]
 
 items="Group for all items."

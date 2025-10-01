@@ -6,12 +6,11 @@
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("inventory_grid", "tooltip")]
 layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_xjbm4")
 cols = 9
 inventory_grid = NodePath("GridContainer")
@@ -20,22 +19,23 @@ tooltip = NodePath("Tooltip")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -32.0
-offset_top = -32.0
-offset_right = -8.0
-offset_bottom = -8.0
+offset_top = -64.0
+offset_right = 32.0
 grow_horizontal = 2
-grow_vertical = 2
-columns = 6
+grow_vertical = 0
+columns = 9
 
 [node name="Tooltip" parent="." instance=ExtResource("2_orgsn")]
 visible = false
 layout_mode = 0
-offset_left = 282.0
-offset_top = -805.0
-offset_right = 282.0
-offset_bottom = -741.0
+offset_left = -35.0372
+offset_top = 118.88374
+offset_right = -35.0372
+offset_bottom = 182.88374
 mouse_filter = 2

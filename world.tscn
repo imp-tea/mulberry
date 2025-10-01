@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bptkema0gehhu"]
+[gd_scene load_steps=7 format=3 uid="uid://bptkema0gehhu"]
 
 [ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://shop.tscn" id="1_udxuc"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://w7ucpreej0io" path="res://customer.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dotmt7bn8j02q" path="res://Items/canebrake_pitcher_plant.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://od6722h7nvpk" path="res://Items/brown_eyed_susan.tscn" id="5_dwbse"]
+[ext_resource type="PackedScene" uid="uid://b5ncbmkgn301w" path="res://Inventory/Inventory.tscn" id="6_dwbse"]
 
 [node name="World" type="Node2D"]
 
@@ -14,9 +15,10 @@
 texture_filter = 1
 position = Vector2(672, 352)
 
-[node name="player" parent="." instance=ExtResource("2_tlwt5")]
+[node name="player" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("2_tlwt5")]
 texture_filter = 1
 position = Vector2(320, 320)
+inventory = NodePath("../CanvasLayer/Inventory")
 
 [node name="Canebrake Pitcher Plant" parent="." instance=ExtResource("4_036b0")]
 position = Vector2(428, 253)
@@ -29,3 +31,7 @@ position = Vector2(363, 401)
 
 [node name="Brown-Eyed Susan2" parent="." instance=ExtResource("5_dwbse")]
 position = Vector2(587, 420)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_dwbse")]

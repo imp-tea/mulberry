@@ -28,8 +28,16 @@ func _physics_process(delta):
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_inventory"):
-		inventory.visible = not inventory.visible
+		#inventory.visible = not inventory.visible
 		inventory_open = not inventory_open
+		if not inventory_open:
+			for i in range(inventory.cols, inventory.cols*inventory.rows):
+				inventory.slots[i].visible = false
+			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+		else:
+			for slot in inventory.slots:
+				slot.visible = true
+			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
