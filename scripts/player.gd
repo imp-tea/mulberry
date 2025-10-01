@@ -9,6 +9,9 @@ var current_hotbar_slot = 0
 @export var speed = TILESIZE*2
 @export var inventory: Inventory
 
+func _ready():
+	add_to_group("player")
+
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
@@ -37,6 +40,14 @@ func _process(delta: float) -> void:
 			for slot in inventory.slots:
 				slot.visible = true
 			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+
+	# Check for NPC interaction
+	if Input.is_action_just_pressed("interact") and not DialogueService.is_in_conversation():
+		var nearby_npcs = get_tree().get_nodes_in_group("npcs")
+		for npc in nearby_npcs:
+			if npc.can_talk_to_player():
+				npc.start_conversation()
+				break
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpb3jl0khrwxj"]
+
+[ext_resource type="Theme" uid="uid://bu4gg3mvgd7d7" path="res://Dialogue/UI/dialogue_theme.tres" id="1"]
+
+[node name="ChoiceButton" type="Button"]
+offset_right = 400.0
+offset_bottom = 31.0
+text = "Choice Option"

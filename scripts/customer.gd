@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends BaseNPC
 
 var TILESIZE = 64
 @export var speed = TILESIZE * 1.5
@@ -21,6 +21,7 @@ func _process(_delta: float) -> void:
 		move_distance(randi_range(1,4), directions[randi_range(0,3)])
 
 func _ready() -> void:
+	super._ready()  # Call BaseNPC._ready() to register with DialogueService
 	$AnimatedSprite2D.play("idle-down")
 
 func input_to_dir(input:Vector2):

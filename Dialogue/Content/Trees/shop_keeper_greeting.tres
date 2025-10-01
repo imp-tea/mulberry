@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="DialogueTree" load_steps=12 format=3 uid="uid://bg56iinscifph"]
+
+[ext_resource type="Script" uid="uid://duwefahvf8mep" path="res://Dialogue/Resources/DialogueChoice.gd" id="1_0hbm1"]
+[ext_resource type="Script" uid="uid://grxmpdt024uf" path="res://Dialogue/Resources/DialogueTree.gd" id="1_1bxas"]
+[ext_resource type="Script" uid="uid://ddtkl6d0duasx" path="res://Dialogue/Resources/DialogueNode.gd" id="2_v4l0o"]
+
+[sub_resource type="Resource" id="Resource_55cq6"]
+script = ExtResource("2_v4l0o")
+type = 2
+metadata/_custom_type_script = "uid://ddtkl6d0duasx"
+
+[sub_resource type="Resource" id="Resource_e8b15"]
+script = ExtResource("1_0hbm1")
+text = "I'd like to buy something!"
+next_node = SubResource("Resource_55cq6")
+metadata/_custom_type_script = "uid://duwefahvf8mep"
+
+[sub_resource type="Resource" id="Resource_3olbn"]
+script = ExtResource("2_v4l0o")
+type = 2
+metadata/_custom_type_script = "uid://ddtkl6d0duasx"
+
+[sub_resource type="Resource" id="Resource_k8vfp"]
+script = ExtResource("1_0hbm1")
+text = "Just looking..."
+next_node = SubResource("Resource_3olbn")
+metadata/_custom_type_script = "uid://duwefahvf8mep"
+
+[sub_resource type="Resource" id="Resource_pdgvy"]
+script = ExtResource("2_v4l0o")
+type = 2
+metadata/_custom_type_script = "uid://ddtkl6d0duasx"
+
+[sub_resource type="Resource" id="Resource_o2bc5"]
+script = ExtResource("1_0hbm1")
+text = "Goodbye."
+next_node = SubResource("Resource_pdgvy")
+metadata/_custom_type_script = "uid://duwefahvf8mep"
+
+[sub_resource type="Resource" id="Resource_metqy"]
+script = ExtResource("2_v4l0o")
+node_id = "choices"
+type = 1
+choices = Array[ExtResource("1_0hbm1")]([SubResource("Resource_e8b15"), SubResource("Resource_k8vfp"), SubResource("Resource_o2bc5")])
+metadata/_custom_type_script = "uid://ddtkl6d0duasx"
+
+[sub_resource type="Resource" id="Resource_lluv2"]
+script = ExtResource("2_v4l0o")
+node_id = "greeting"
+text = "Welcome to my shop! How can I help you?"
+next_node = SubResource("Resource_metqy")
+metadata/_custom_type_script = "uid://ddtkl6d0duasx"
+
+[resource]
+script = ExtResource("1_1bxas")
+tree_id = "shop_keeper_greeting"
+root_node = SubResource("Resource_lluv2")
+metadata/_custom_type_script = "uid://grxmpdt024uf"
