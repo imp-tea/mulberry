@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bptkema0gehhu"]
 
-[ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://shop.tscn" id="1_udxuc"]
+[ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://map.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://w7ucpreej0io" path="res://customer.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dotmt7bn8j02q" path="res://Items/canebrake_pitcher_plant.tscn" id="4_036b0"]
@@ -9,7 +9,7 @@
 
 [node name="World" type="Node2D"]
 
-[node name="shop" parent="." instance=ExtResource("1_udxuc")]
+[node name="Map" parent="." instance=ExtResource("1_dwbse")]
 
 [node name="customer" parent="." instance=ExtResource("3_aqk2v")]
 texture_filter = 1

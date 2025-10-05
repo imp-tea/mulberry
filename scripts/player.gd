@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 			for slot in inventory.slots:
 				slot.visible = true
 			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	if Input.is_action_just_pressed("interact"):
+		var resource = load("res://sample_emily.dialogue")
+		DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
