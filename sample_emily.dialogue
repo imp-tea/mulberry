@@ -46,8 +46,13 @@ else
 
 ~ birthday
 Emily: [#surprised, #happy] You remembered my birthday!
-Emily: This is the best gift ever!
-set GameState.saw_emily_birthday = true
+- Yes, I did!
+	Emily: You're the best.
+- Err... sure I did, happy birthday!
+	Emily: Did you really?
+- I had NO idea.
+	Emily: Oh... that's fine...
+=> END
 
 ~ random_barks
 Emily: Nice weather today!
