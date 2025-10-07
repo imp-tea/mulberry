@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cmgfe433of0dk" path="res://sprites/plants/sarracenia-alabamensis.png" id="2_8hhmd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ugo5"]
-radius = 16.0
 
 [node name="Canebrake Pitcher Plant" type="Area2D" groups=["items"]]
 texture_filter = 1
@@ -15,7 +14,9 @@ is_stackable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, 8)
 texture = ExtResource("2_8hhmd")
+offset = Vector2(0, -35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2ugo5")

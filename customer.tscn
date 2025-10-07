@@ -18,9 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gmbb4ywb7wu" path="res://sprites/actors/customer/walk_up_left.png" id="15_30bt6"]
 [ext_resource type="Texture2D" uid="uid://ch8bc5lge4r6b" path="res://sprites/actors/customer/walk_up_right.png" id="16_04p81"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1amq5"]
-radius = 11.0
-height = 40.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_c6vkw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7qe4n"]
 atlas = ExtResource("1_bfkud")
@@ -558,9 +556,11 @@ motion_mode = 1
 script = ExtResource("1_c6vkw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_1amq5")
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_c6vkw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_kcilg")
 animation = &"idle-down"
 offset = Vector2(-1, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bptkema0gehhu"]
+[gd_scene load_steps=11 format=3 uid="uid://bptkema0gehhu"]
 
 [ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://map.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
@@ -6,32 +6,59 @@
 [ext_resource type="PackedScene" uid="uid://dotmt7bn8j02q" path="res://Items/canebrake_pitcher_plant.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://od6722h7nvpk" path="res://Items/brown_eyed_susan.tscn" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b5ncbmkgn301w" path="res://Inventory/Inventory.tscn" id="6_dwbse"]
+[ext_resource type="Script" uid="uid://bold5l5sab11h" path="res://tile_outline.gd" id="6_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://btb8nepbkquio" path="res://sprites/tile_outline.png" id="6_pkg7o"]
+[ext_resource type="Material" uid="uid://cc2hntk1eapfu" path="res://Shaders/whole_screen.tres" id="9_ioo17"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbfbk"]
 
 [node name="World" type="Node2D"]
+material = SubResource("ShaderMaterial_gbfbk")
 
 [node name="Map" parent="." instance=ExtResource("1_dwbse")]
 
-[node name="customer" parent="." instance=ExtResource("3_aqk2v")]
+[node name="tile_outline" type="Node2D" parent="."]
+script = ExtResource("6_gbfbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="tile_outline"]
+texture = ExtResource("6_pkg7o")
+
+[node name="Y-Sorted" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="customer" parent="Y-Sorted" instance=ExtResource("3_aqk2v")]
 texture_filter = 1
 position = Vector2(672, 352)
 
-[node name="player" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("2_tlwt5")]
+[node name="player" parent="Y-Sorted" node_paths=PackedStringArray("inventory") instance=ExtResource("2_tlwt5")]
 texture_filter = 1
 position = Vector2(320, 320)
-inventory = NodePath("../CanvasLayer/Inventory")
+inventory = NodePath("../../CanvasLayer/Inventory")
 
-[node name="Canebrake Pitcher Plant" parent="." instance=ExtResource("4_036b0")]
+[node name="Canebrake Pitcher Plant" parent="Y-Sorted" instance=ExtResource("4_036b0")]
 position = Vector2(428, 253)
 
-[node name="Canebrake Pitcher Plant2" parent="." instance=ExtResource("4_036b0")]
+[node name="Canebrake Pitcher Plant2" parent="Y-Sorted" instance=ExtResource("4_036b0")]
 position = Vector2(702, 248)
 
-[node name="Brown-Eyed Susan" parent="." instance=ExtResource("5_dwbse")]
+[node name="Brown-Eyed Susan" parent="Y-Sorted" instance=ExtResource("5_dwbse")]
 position = Vector2(363, 401)
 
-[node name="Brown-Eyed Susan2" parent="." instance=ExtResource("5_dwbse")]
+[node name="Brown-Eyed Susan2" parent="Y-Sorted" instance=ExtResource("5_dwbse")]
 position = Vector2(587, 420)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = ExtResource("9_ioo17")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_dwbse")]
+mouse_filter = 1

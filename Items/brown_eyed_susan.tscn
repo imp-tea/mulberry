@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://ib5squjbx2aj" path="res://sprites/plants/rudbeckia-hirta.png" id="2_1jf17"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ugo5"]
-radius = 16.03122
 
 [node name="Brown-Eyed Susan" type="Area2D" groups=["items"]]
 texture_filter = 1
@@ -15,7 +14,9 @@ is_stackable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -12)
 texture = ExtResource("2_1jf17")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_2ugo5")

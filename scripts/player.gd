@@ -6,8 +6,14 @@ var facing = "-down"
 var anim_speed = 1.5
 var inventory_open = false
 var current_hotbar_slot = 0
+var hovered = false
 @export var speed = TILESIZE*2
 @export var inventory: Inventory
+
+func _ready() -> void:
+	PlayerVariables.inventory = inventory
+	PlayerVariables.position = self.position
+	PlayerVariables.tile = self.get_tile()
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -41,6 +47,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		var resource = load("res://sample_emily.dialogue")
 		DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
+	
+	PlayerVariables.position = self.position
+	PlayerVariables.tile = self.get_tile()
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
@@ -61,12 +70,19 @@ func input_to_dir(input:Vector2):
 	else:
 		return "-up-right"
 
-func _on_area_2d_body_entered(body):
-	if body in get_tree().get_nodes_in_group("items"):
-		self.inventory.add_item(body as Item, 1)
-
-
 func _on_area_2d_area_entered(area):
 	if area in get_tree().get_nodes_in_group("items"):
 		self.inventory.add_item(area as Item, 1)
-		print("item touched")
+
+func _mouse_enter() -> void:
+	var outline:ShaderMaterial = load("res://Shaders/outline.tres")
+	outline.set_shader_parameter("number_of_images", Vector2(4,1))
+	$AnimatedSprite2D.set_material(outline)
+	self.hovered = true
+	
+func _mouse_exit() -> void:
+	$AnimatedSprite2D.set_material(null)
+	self.hovered = false
+
+func get_tile():
+	return Vector2(roundi(position.x/Global.tile_size),roundi(position.y/Global.tile_size))
