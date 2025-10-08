@@ -45,9 +45,19 @@ func _process(delta: float) -> void:
 			for slot in inventory.slots:
 				slot.visible = true
 			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	  # Replace the interact section:
 	if Input.is_action_just_pressed("interact"):
-		var resource = load("res://sample_emily.dialogue")
-		DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
+		# Check if current hotbar slot has a placeable item
+		var hotbar_item = inventory.slots[current_hotbar_slot].item
+
+		if hotbar_item and hotbar_item.item_type in ["Placeable", "Plant", "Structure"]:
+				# Get target tile (the tile the player is facing)
+				var target_tile = get_facing_tile()
+				place_item(hotbar_item, target_tile)
+		else:
+				# Default interaction - trigger dialogue
+				var resource = load("res://sample_emily.dialogue")
+				DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
 	
 	PlayerVariables.position = self.position
 	PlayerVariables.tile = Global.get_tile(position)
@@ -84,3 +94,43 @@ func _mouse_enter() -> void:
 func _mouse_exit() -> void:
 	$AnimatedSprite2D.set_material(null)
 	self.hovered = false
+
+# Get the tile the player is currently facing
+func get_facing_tile() -> Vector2:
+	var player_tile = Global.get_tile(position)
+	var facing_offset = Vector2.ZERO
+
+	# Determine offset based on facing direction
+	if "right" in facing:
+			facing_offset.x += 1
+	elif "left" in facing:
+			facing_offset.x -= 1
+
+	if "down" in facing:
+			facing_offset.y += 1
+	elif "up" in facing:
+			facing_offset.y -= 1
+
+	return player_tile + facing_offset
+
+
+# Place an item from inventory into the world
+func place_item(inventory_item: InventoryItem, tile: Vector2):
+	if inventory_item.world_scene_path.is_empty():
+			push_error("Cannot place item: no scene path stored")
+			return
+
+	# Reinstantiate world item
+	var world_item: Placeable = load(inventory_item.world_scene_path).instantiate()
+	var world_position = tile * Global.tile_size + Vector2.ONE * Global.half_tile
+	world_item.position = world_position
+	get_tree().current_scene.add_child(world_item)
+
+	# Call placement hook if available
+	if world_item.has_method("on_placed"):
+			world_item.on_placed(tile)
+
+	# Remove from inventory
+	inventory_item.amount -= 1
+	if inventory_item.amount <= 0:
+			inventory.slots[current_hotbar_slot].remove_item()

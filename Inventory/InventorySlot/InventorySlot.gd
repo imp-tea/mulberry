@@ -28,14 +28,20 @@ func _ready():
 # When slot is pressed
 func _on_texture_button_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			slot_input.emit(
-				self, InventorySlotAction.SELECT
-			)
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			slot_input.emit(
-				self, InventorySlotAction.SPLIT
-			)
+			if event.button_index == MOUSE_BUTTON_LEFT:
+					slot_input.emit(
+							self, InventorySlotAction.SELECT
+					)
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+					# Check if item is consumable - if so, consume it
+					if item and item.item_type == "Consumable":
+							consume_item()
+					else:
+							# Otherwise, split as normal
+							slot_input.emit(
+									self, InventorySlotAction.SPLIT
+							)
+
 
 
 
@@ -141,7 +147,7 @@ func split_item() -> InventoryItem:
 		new_item.set_data(
 			self.item.item_name, self.item.icon,
 			self.item.is_stackable, self.item.amount,
-			self.item.is_placeable
+			self.item.item_type, self.item.world_scene_path
 		) # Because .duplicate() is buggy (doesnt make it unique0 thats why duplicating via this way
 		new_item.amount = self.item.amount / 2
 		self.item.amount -= new_item.amount
@@ -153,6 +159,24 @@ func split_item() -> InventoryItem:
 	else:
 		return null
 
+# Consume a consumable item
+func consume_item():
+	if not item or item.item_type != "Consumable":
+			return
+
+	if item.world_scene_path.is_empty():
+			push_error("Cannot consume item: no scene path stored")
+			return
+
+	# Instantiate temporarily to call consume()
+	var temp_item: Consumable = load(item.world_scene_path).instantiate()
+	temp_item.consume(PlayerVariables)
+	temp_item.queue_free()
+
+	# Reduce count
+	item.amount -= 1
+	if item.amount <= 0:
+			remove_item()
 
 
 # Is slot empty (has no item)

@@ -35,8 +35,26 @@ func _ready():
 func _process(delta):
 	tooltip.global_position = get_global_mouse_position() + Vector2.ONE * 8
 	if selected_item:
-		tooltip.visible = false
-		selected_item.global_position = get_global_mouse_position()
+			tooltip.visible = false
+			selected_item.global_position = get_global_mouse_position()
+
+			# Check if item is being dragged outside inventory bounds (for dropping)
+			if Input.is_action_just_released("ui_select") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == false:
+					var mouse_pos = get_global_mouse_position()
+					var inventory_rect = inventory_grid.get_global_rect()
+
+					# If released outside inventory area, drop the item
+					if not inventory_rect.has_point(mouse_pos):
+							if selected_item.item_type in ["Droppable", "Consumable"]:
+									# Drop at player position or mouse position in world
+									var drop_pos = PlayerVariables.position
+									drop_item_to_world(selected_item, drop_pos)
+
+									# Remove the item if amount is now 0
+									if selected_item.amount <= 0:
+											selected_item.queue_free()
+											selected_item = null
+
 
 
 
@@ -74,20 +92,37 @@ func _on_slot_hovered(which: InventorySlot, is_hovering: bool):
 # Calling thius func impies that item is not already in inventory
 func add_item(item: Item, amount: int) -> void:
 	var _item: InventoryItem = inventory_item_scene.instantiate() # Duplicate
+
+	# Determine item type via class hierarchy (check most specific first)
+	var item_type = "Item"
+	if item is Consumable:
+			item_type = "Consumable"
+	elif item is Plant:
+			item_type = "Plant"
+	elif item is Structure:
+			item_type = "Structure"
+	elif item is Placeable:
+			item_type = "Placeable"
+	elif item is Droppable:
+			item_type = "Droppable"
+
+	# Get scene path for reinstantiation
+	var scene_path = item.scene_file_path
+
 	_item.set_data(
-		item.item_name, item.icon, item.is_stackable, amount, item.is_placeable
+			item.item_name, item.icon, item.is_stackable, amount, item_type, scene_path
 	)
 	item.queue_free() # Consume the item by inventory (by the end of frame)
 	if item.is_stackable:
-		for slot in slots:
-			if slot.item and slot.item.item_name == _item.item_name: # if item and is of same type
-				slot.item.amount += _item.amount
-				return
+			for slot in slots:
+					if slot.item and slot.item.item_name == _item.item_name: # if item and is of same type
+							slot.item.amount += _item.amount
+							return
 	for slot in slots:
-		if slot.item == null and slot.is_respecting_hint(_item):
-			slot.item = _item
-			slot.update_slot()
-			return
+			if slot.item == null and slot.is_respecting_hint(_item):
+					slot.item = _item
+					slot.update_slot()
+					return
 
 
 
@@ -142,3 +177,20 @@ func remove_all(_name: String) -> void:
 func clear_inventory() -> void:
 	for slot in slots:
 		slot.remove_item()
+
+# Drop an item from inventory into the world at specified position
+func drop_item_to_world(inventory_item: InventoryItem, drop_position: Vector2) -> void:
+	if inventory_item.item_type not in ["Droppable", "Consumable"]:
+			return  # Can't drop this type
+
+	if inventory_item.world_scene_path.is_empty():
+			push_error("Cannot drop item: no scene path stored")
+			return
+
+	# Reinstantiate the world item from its scene
+	var world_item: Item = load(inventory_item.world_scene_path).instantiate()
+	world_item.position = drop_position
+	get_tree().current_scene.add_child(world_item)
+
+	# Reduce inventory amount
+	inventory_item.amount -= 1

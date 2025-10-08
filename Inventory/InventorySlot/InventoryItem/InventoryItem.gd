@@ -3,19 +3,23 @@ class_name InventoryItem
 
 # NOTE: IT IS not SLOT AMOUNT, but currently carried amount
 @export var amount: int = 0 # Amount that is being carried in inventory
-
 @export var sprite: Sprite2D
 @export var label: Label
 
+# New properties to track item type and world scene
+var item_type: String = "Item"  # "Droppable", "Consumable", "Placeable", "Plant", "Structure"
+var world_scene_path: String = ""  # Path to original scene for reinstantiation
 
-func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int, _is_placebale:bool):
+
+# Replace the set_data function:
+func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int, _type: String = "Item", _scene_path: String = ""):
 	self.item_name = _name
 	self.name = _name
 	self.icon = _icon
 	self.is_stackable = _is_stackable
 	self.amount = _amount
-	self.is_placeable = _is_placebale
-
+	self.item_type = _type
+	self.world_scene_path = _scene_path
 
 func _process(delta):
 	self.sprite.texture = self.icon
