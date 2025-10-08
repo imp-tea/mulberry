@@ -7,6 +7,6 @@ shader = ExtResource("1_aq1g3")
 shader_parameter/time_of_day = 0.50000002375
 shader_parameter/night_mul = Vector3(0.3, 0.3, 0.75)
 shader_parameter/dawn_mul = Vector3(1.2, 1, 0.5)
-shader_parameter/contrast_night = 0.9440000210899999
+shader_parameter/contrast_night = 0.94400002109
 shader_parameter/gamma_night = 1.422000043795
 shader_parameter/dither_strength = 0.0

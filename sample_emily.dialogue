@@ -26,8 +26,10 @@ if GameState.emily_quest_stage == 0
 		Emily: Thank you so much, I need amethyst and jade.
 		set GameState.emily_quest_stage = 1
 		do GameState.active_quests.append("emily_gemstones")
+		=> END
 	- Maybe another time.
 		Emily: That's ok, I understand.
+		=> END
 else
 	=> quest_gemstones_complete
 
@@ -38,6 +40,9 @@ if GameState.emily_quest_stage == 1
 		set GameState.emily_quest_stage = 2
 		set GameState.relationship_emily += 2
 		Emily: Here, take this as a thank you.
+		=> END
+	else
+		Emily: I really need those gemstones...
 		=> END
 else
 	if GameState.emily_quest_stage == 2

@@ -167,9 +167,6 @@ func has_same_item(_item: InventoryItem):
 	return _item.item_name == self.item.item_name
 
 
-
-
-
 func update_slot():
 	if item:
 		if not self.get_children().has(item):

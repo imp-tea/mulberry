@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bptkema0gehhu"]
+[gd_scene load_steps=10 format=3 uid="uid://bptkema0gehhu"]
 
 [ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://map.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
@@ -10,10 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://btb8nepbkquio" path="res://sprites/tile_outline.png" id="6_pkg7o"]
 [ext_resource type="Material" uid="uid://cc2hntk1eapfu" path="res://Shaders/whole_screen.tres" id="9_ioo17"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbfbk"]
-
 [node name="World" type="Node2D"]
-material = SubResource("ShaderMaterial_gbfbk")
 
 [node name="Map" parent="." instance=ExtResource("1_dwbse")]
 
@@ -22,6 +19,7 @@ script = ExtResource("6_gbfbk")
 
 [node name="Sprite2D" type="Sprite2D" parent="tile_outline"]
 texture = ExtResource("6_pkg7o")
+centered = false
 
 [node name="Y-Sorted" type="Node2D" parent="."]
 y_sort_enabled = true

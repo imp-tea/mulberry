@@ -13,11 +13,11 @@ var hovered = false
 func _ready() -> void:
 	PlayerVariables.inventory = inventory
 	PlayerVariables.position = self.position
-	PlayerVariables.tile = self.get_tile()
+	PlayerVariables.tile = Global.get_tile(position)
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed
+	velocity = input_direction.normalized() * speed
 	if velocity.is_zero_approx():
 		movement_state = "idle"
 		$AnimatedSprite2D.speed_scale = 1.0
@@ -31,6 +31,7 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	position = Vector2(round(position.x),round(position.y))
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_inventory"):
@@ -49,7 +50,7 @@ func _process(delta: float) -> void:
 		DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
 	
 	PlayerVariables.position = self.position
-	PlayerVariables.tile = self.get_tile()
+	PlayerVariables.tile = Global.get_tile(position)
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
@@ -83,6 +84,3 @@ func _mouse_enter() -> void:
 func _mouse_exit() -> void:
 	$AnimatedSprite2D.set_material(null)
 	self.hovered = false
-
-func get_tile():
-	return Vector2(roundi(position.x/Global.tile_size),roundi(position.y/Global.tile_size))

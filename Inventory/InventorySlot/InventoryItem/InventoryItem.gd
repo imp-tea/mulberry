@@ -8,7 +8,6 @@ class_name InventoryItem
 @export var label: Label
 
 
-
 func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int, _is_placebale:bool):
 	self.item_name = _name
 	self.name = _name
@@ -16,7 +15,6 @@ func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int
 	self.is_stackable = _is_stackable
 	self.amount = _amount
 	self.is_placeable = _is_placebale
-
 
 
 func _process(delta):
@@ -28,12 +26,10 @@ func _process(delta):
 		label.visible = false
 
 
-
 func set_sprite_size_to(sprite: Sprite2D, size: Vector2):
 	var texture_size = sprite.texture.get_size()
 	var scale_factor = Vector2(size.x / texture_size.x, size.y / texture_size.y)
 	sprite.scale = scale_factor
-
 
 
 func fade():
