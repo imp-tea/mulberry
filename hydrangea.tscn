@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://mffmrhh7p8ld"]
+
+[ext_resource type="Script" uid="uid://wu7undkj0hhw" path="res://hydrangea.gd" id="1_wyvdh"]
+[ext_resource type="Texture2D" uid="uid://b1guls4g5fdvb" path="res://sprites/plants/hydrangea-quercifolia.png" id="2_1vevo"]
+[ext_resource type="Texture2D" uid="uid://j1u0f40ut2sh" path="res://sprites/pots/basic_pots.png" id="3_7ctbv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3nngh"]
+
+[node name="Hydrangea" type="Area2D"]
+script = ExtResource("1_wyvdh")
+item_name = "Hydrangea"
+icon = ExtResource("2_1vevo")
+is_stackable = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -29)
+texture = ExtResource("2_1vevo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("3_7ctbv")
+region_enabled = true
+region_rect = Rect2(73, 23, 14, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3nngh")

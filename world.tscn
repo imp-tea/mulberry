@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://map.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://w7ucpreej0io" path="res://customer.tscn" id="3_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://dotmt7bn8j02q" path="res://Items/canebrake_pitcher_plant.tscn" id="4_036b0"]
-[ext_resource type="PackedScene" uid="uid://od6722h7nvpk" path="res://Items/brown_eyed_susan.tscn" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://b5ncbmkgn301w" path="res://Inventory/Inventory.tscn" id="6_dwbse"]
 [ext_resource type="Script" uid="uid://bold5l5sab11h" path="res://tile_outline.gd" id="6_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://mffmrhh7p8ld" path="res://hydrangea.tscn" id="6_ioo17"]
 [ext_resource type="Texture2D" uid="uid://btb8nepbkquio" path="res://sprites/tile_outline.png" id="6_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://drrufj0urhqx7" path="res://chest.tscn" id="7_ioo17"]
 [ext_resource type="Material" uid="uid://cc2hntk1eapfu" path="res://Shaders/whole_screen.tres" id="9_ioo17"]
 
 [node name="World" type="Node2D"]
@@ -33,17 +33,10 @@ texture_filter = 1
 position = Vector2(320, 320)
 inventory = NodePath("../../CanvasLayer/Inventory")
 
-[node name="Canebrake Pitcher Plant" parent="Y-Sorted" instance=ExtResource("4_036b0")]
-position = Vector2(428, 253)
+[node name="Hydrangea" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(139.64081, 144.09988)
 
-[node name="Canebrake Pitcher Plant2" parent="Y-Sorted" instance=ExtResource("4_036b0")]
-position = Vector2(702, 248)
-
-[node name="Brown-Eyed Susan" parent="Y-Sorted" instance=ExtResource("5_dwbse")]
-position = Vector2(363, 401)
-
-[node name="Brown-Eyed Susan2" parent="Y-Sorted" instance=ExtResource("5_dwbse")]
-position = Vector2(587, 420)
+[node name="Chest" parent="Y-Sorted" instance=ExtResource("7_ioo17")]
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
