@@ -7,6 +7,7 @@ var anim_speed = 1.5
 var inventory_open = false
 var current_hotbar_slot = 0
 var hovered = false
+var can_place_item = true
 @export var speed = TILESIZE*2
 @export var inventory: Inventory
 
@@ -50,10 +51,11 @@ func _process(delta: float) -> void:
 	  # Replace the interact section:
 		  # Handle item placement with validation
 	if Input.is_action_just_pressed("interact"):
+		var item_in_facing_tile = TileManager.get_occupying_item(PlayerVariables.facing_tile)
 		# Check if current hotbar slot has a placeable item
 		var hotbar_item = inventory.slots[current_hotbar_slot].item
 
-		if hotbar_item and hotbar_item.item_type in ["Placeable", "Plant", "Structure"]:
+		if hotbar_item and hotbar_item.item_type in ["Placeable", "Plant", "Structure"] and can_place_item:
 			# Get target tile (the tile the player is facing)
 			var target_tile = PlayerVariables.facing_tile
 
@@ -72,6 +74,9 @@ func _process(delta: float) -> void:
 					# Show error feedback
 					print("Cannot place: ", validation.reason)
 					temp_item.queue_free()
+		if item_in_facing_tile and item_in_facing_tile.picked_up_on_interaction:
+			TileManager.unregister_placement(PlayerVariables.facing_tile)
+			Global.add_to_inventory(item_in_facing_tile, 1)
 
 	
 	PlayerVariables.position = self.position
@@ -98,7 +103,8 @@ func input_to_dir(input:Vector2):
 		return "-up-right"
 
 func _mouse_enter() -> void:
-	var outline:ShaderMaterial = load("res://Shaders/outline.tres")
+	var outline:ShaderMaterial = ShaderMaterial.new()
+	outline.set_script("res://assets/shaders/outline.gdshader")
 	outline.set_shader_parameter("number_of_images", Vector2(4,1))
 	$AnimatedSprite2D.set_material(outline)
 	self.hovered = true
@@ -140,11 +146,7 @@ func place_item(inventory_item: InventoryItem, tile: Vector2):
 	get_parent().add_child(world_item)
 	
 	# Register placement with TileManager
-	TileManager.register_placement(tile, world_item)
-
-	# Call placement hook if available
-	if world_item.has_method("on_placed"):
-			world_item.on_placed(tile)
+	#TileManager.register_placement(tile, world_item)
 
 	# Remove from inventory
 	inventory_item.amount -= 1

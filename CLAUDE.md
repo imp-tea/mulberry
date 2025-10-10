@@ -45,7 +45,7 @@ Item (Items/Item.gd)
 │   ├── Plant (Items/Plant.gd) - Placeable plants
 │   └── Structure (Items/Structure.gd) - Placeable structures with pickup requirements
 └── Droppable (Items/Droppable.gd) - Items that can be dropped in the world
-    └── Consumable (Items/Consumable.gd) - Droppable items that can be consumed
+	└── Consumable (Items/Consumable.gd) - Droppable items that can be consumed
 ```
 
 All items must:

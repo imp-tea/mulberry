@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clum64wvxgitr"]
 
 [ext_resource type="Script" uid="uid://bgyg58l471mij" path="res://scripts/ui/inventory/InventoryItem.gd" id="1_5wodm"]
-[ext_resource type="Texture2D" uid="uid://q70httxuu1ah" path="res://icon.svg" id="2_qr6jv"]
+[ext_resource type="Texture2D" uid="uid://q70httxuu1ah" path="res://assets/sprites/icon.svg" id="2_qr6jv"]
 
 [sub_resource type="FontFile" id="FontFile_gs78a"]
 cache/0/16/0/ascent = 0.0

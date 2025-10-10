@@ -10,21 +10,19 @@ radius = 24.0
 
 [node name="Chest" type="Node2D"]
 script = ExtResource("1_8uwsg")
+requires_tool_to_pickup = false
 item_name = "Chest"
 icon = ExtResource("2_bp1or")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bp1or")
-centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_trlyu")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_8uwsg")

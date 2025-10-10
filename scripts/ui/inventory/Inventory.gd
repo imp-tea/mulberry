@@ -113,6 +113,7 @@ func add_item(item: Item, amount: int) -> void:
 	_item.set_data(
 			item.item_name, item.icon, item.is_stackable, amount, item_type, scene_path
 	)
+	
 	item.queue_free() # Consume the item by inventory (by the end of frame)
 	if item.is_stackable:
 			for slot in slots:
