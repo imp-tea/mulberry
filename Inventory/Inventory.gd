@@ -28,6 +28,7 @@ func _ready():
 		if i >= cols:
 			slot.visible = false
 	tooltip.visible = false
+	Global.inventory = self
 
 
 

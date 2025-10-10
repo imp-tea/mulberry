@@ -14,6 +14,8 @@ func _ready() -> void:
 	PlayerVariables.inventory = inventory
 	PlayerVariables.position = self.position
 	PlayerVariables.tile = Global.get_tile(position)
+	PlayerVariables.facing_tile = get_facing_tile()
+	Global.player = self
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -52,15 +54,12 @@ func _process(delta: float) -> void:
 
 		if hotbar_item and hotbar_item.item_type in ["Placeable", "Plant", "Structure"]:
 				# Get target tile (the tile the player is facing)
-				var target_tile = get_facing_tile()
+				var target_tile = PlayerVariables.facing_tile
 				place_item(hotbar_item, target_tile)
-		else:
-				# Default interaction - trigger dialogue
-				var resource = load("res://sample_emily.dialogue")
-				DialogueManager.show_dialogue_balloon(resource,"quest_gemstones_start")
 	
 	PlayerVariables.position = self.position
 	PlayerVariables.tile = Global.get_tile(position)
+	PlayerVariables.facing_tile = get_facing_tile()
 
 func input_to_dir(input:Vector2):
 	var ang = input.angle()
@@ -80,10 +79,6 @@ func input_to_dir(input:Vector2):
 		return "-up"
 	else:
 		return "-up-right"
-
-func _on_area_2d_area_entered(area):
-	if area in get_tree().get_nodes_in_group("items"):
-		self.inventory.add_item(area as Item, 1)
 
 func _mouse_enter() -> void:
 	var outline:ShaderMaterial = load("res://Shaders/outline.tres")
@@ -134,3 +129,16 @@ func place_item(inventory_item: InventoryItem, tile: Vector2):
 	inventory_item.amount -= 1
 	if inventory_item.amount <= 0:
 			inventory.slots[current_hotbar_slot].remove_item()
+
+
+#func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	#var top_node = area.get_owner()
+	#print(top_node.name)
+	#if top_node in get_tree().get_nodes_in_group("items"):
+		#self.inventory.add_item(top_node as Item, 1)
+
+func _on_area_2d_area_entered(area):
+	var top_node = area.get_owner()
+	print(top_node.name)
+	if top_node in get_tree().get_nodes_in_group("pickup_items"):
+		self.inventory.add_item(top_node as Item, 1)
