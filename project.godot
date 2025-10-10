@@ -21,6 +21,7 @@ Global="*res://scripts/global.gd"
 PlayerVariables="*res://scripts/player_variables.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameState="*res://game_state.gd"
+TileManager="*res://tile_manager.gd"
 
 [dialogue_manager]
 

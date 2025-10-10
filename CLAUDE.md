@@ -27,11 +27,12 @@ There are no build commands - Godot projects run directly from the editor during
 
 ### Autoload Singletons (Global State)
 
-Four autoload scripts manage global state (defined in `project.godot`):
+Five autoload scripts manage global state (defined in `project.godot`):
 
 - **Global** (`scripts/global.gd`): Tile size constants and tile coordinate conversion
 - **PlayerVariables** (`scripts/player_variables.gd`): Stores player position, tile, and inventory reference
 - **GameState** (`game_state.gd`): Quest states, relationships, and game flags
+- **TileManager** (`tile_manager.gd`): Tile occupancy tracking, terrain type detection, and placement validation
 - **DialogueManager** (addon): Handles dialogue balloons and dialogue resources
 
 ### Item System Hierarchy
@@ -96,6 +97,28 @@ The player (`scripts/player.gd`) implements:
 - **Hotbar system**: `current_hotbar_slot` tracks active hotbar slot (first row of inventory)
 - **Item placement**: Press 'E' to place item from active hotbar slot at facing tile
 - **Inventory toggle**: Press 'I' or Tab to show/hide full inventory grid (hotbar always visible)
+
+### Tile Management System
+
+The **TileManager** singleton (`tile_manager.gd`) provides centralized tile state management:
+
+**Core functionality:**
+- `get_terrain_type(tile: Vector2) -> String`: Returns terrain type ("grass", "dirt", "water", etc.) from TileMap
+- `is_tile_occupied(tile: Vector2) -> bool`: Checks if a placed item occupies the tile
+- `get_occupying_item(tile: Vector2) -> Node`: Returns the item/structure at a tile (if any)
+- `register_placement(tile: Vector2, item: Node)`: Records an item placement
+- `unregister_placement(tile: Vector2)`: Removes placement record when item is removed
+- `get_tile_state(tile: Vector2) -> Dictionary`: Returns complete state info for a tile
+
+**Data structure:**
+- Uses Dictionary with Vector2 keys for O(1) tile lookups
+- Each tile stores: terrain type, occupying item reference, item type
+- Only stores data for tiles with placed items (memory efficient)
+
+**Integration:**
+- Requires TileMapLayer tagged with "tilemap" group (done in `map.tscn`)
+- Terrain data read from Godot's TileSet terrain system
+- Phase 1: Foundation complete (occupancy tracking + terrain detection)
 
 ## Input Actions
 
