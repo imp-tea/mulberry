@@ -48,14 +48,31 @@ func _process(delta: float) -> void:
 				slot.visible = true
 			inventory.inventory_grid.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	  # Replace the interact section:
+		  # Handle item placement with validation
 	if Input.is_action_just_pressed("interact"):
 		# Check if current hotbar slot has a placeable item
 		var hotbar_item = inventory.slots[current_hotbar_slot].item
 
 		if hotbar_item and hotbar_item.item_type in ["Placeable", "Plant", "Structure"]:
-				# Get target tile (the tile the player is facing)
-				var target_tile = PlayerVariables.facing_tile
-				place_item(hotbar_item, target_tile)
+			# Get target tile (the tile the player is facing)
+			var target_tile = PlayerVariables.facing_tile
+
+			# Load the item temporarily to check placement validity
+			if not hotbar_item.world_scene_path.is_empty():
+				var temp_item: Placeable = load(hotbar_item.world_scene_path).instantiate()
+
+				# Validate placement
+				var validation = TileManager.can_place_item(temp_item, target_tile)
+
+				if validation.valid:
+					# Free temp item and place actual item
+					temp_item.queue_free()
+					place_item(hotbar_item, target_tile)
+				else:
+					# Show error feedback
+					print("Cannot place: ", validation.reason)
+					temp_item.queue_free()
+
 	
 	PlayerVariables.position = self.position
 	PlayerVariables.tile = Global.get_tile(position)
@@ -120,6 +137,9 @@ func place_item(inventory_item: InventoryItem, tile: Vector2):
 	var world_position = tile * Global.tile_size + Vector2.ONE * Global.half_tile
 	world_item.position = world_position
 	get_tree().current_scene.add_child(world_item)
+	
+	# Register placement with TileManager
+	TileManager.register_placement(tile, world_item)
 
 	# Call placement hook if available
 	if world_item.has_method("on_placed"):

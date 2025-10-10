@@ -3,6 +3,15 @@ extends Node
 # TileManager - Centralized tile state management system
 # Tracks occupancy, terrain types, and placement validation
 
+  # PlacementResult class - returned by validation checks
+class PlacementResult:
+	var valid: bool = false
+	var reason: String = ""
+	func _init(is_valid: bool = false, fail_reason: String = ""):
+		valid = is_valid
+		reason = fail_reason
+
+
 # Dictionary to store tile state data
 # Key: Vector2 (tile coordinate)
 # Value: Dictionary with tile state information
@@ -104,6 +113,31 @@ func get_tile_state(tile: Vector2) -> Dictionary:
 func clear_all_data() -> void:
 	tile_data.clear()
 	print("TileManager: Cleared all tile data")
+
+# Validate if an item can be placed at a specific tile
+func can_place_item(item: Placeable, tile: Vector2) -> PlacementResult:
+	# Check 1: Tile already occupied?
+	if is_tile_occupied(tile):
+		return PlacementResult.new(false, "Tile already occupied")
+	
+	# Check 2: Get terrain type
+	var terrain = get_terrain_type(tile)
+	if terrain == "unknown":
+		return PlacementResult.new(false, "Invalid tile")
+	
+  	# Check 3: Item terrain requirements met?
+	if not item.can_place_on_terrain(terrain):
+		return PlacementResult.new(false, "Cannot place on " + terrain)
+
+  	# Check 4: Custom item requirements (if method exists)
+	if item.has_method("custom_placement_check"):
+		var custom_result = item.custom_placement_check(tile)
+		if not custom_result.valid:
+			return custom_result
+	
+	# All checks passed
+	return PlacementResult.new(true, "")
+
 
 # Debug: Print tile state
 func debug_print_tile(tile: Vector2) -> void:

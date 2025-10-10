@@ -22,6 +22,10 @@ func can_pickup() -> bool:
 func pickup() -> void:
 	if not can_pickup():
 			return
+	
+	# Get tile position before removal
+	var tile = Global.get_tile(self.position)
+	TileManager.unregister_placement(tile)
 
 	# Convert back to inventory item
 	if PlayerVariables.inventory:
