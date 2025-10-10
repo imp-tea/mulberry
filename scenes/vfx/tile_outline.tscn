@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://brbqu0wqeotin"]
+
+[ext_resource type="Script" uid="uid://bold5l5sab11h" path="res://scripts/vfx/tile_outline.gd" id="1_bt4eh"]
+[ext_resource type="Texture2D" uid="uid://btb8nepbkquio" path="res://assets/sprites/tile_outline.png" id="2_oyfxy"]
+
+[node name="tile_outline" type="Node2D"]
+script = ExtResource("1_bt4eh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_oyfxy")
+centered = false

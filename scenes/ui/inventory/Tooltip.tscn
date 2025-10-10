@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://u61ihnr4k620"]
+
+[ext_resource type="Script" uid="uid://cxeuxt6np3sl2" path="res://scripts/ui/inventory/Tooltip.gd" id="1_vuimh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c1kt4"]
+font_size = 14
+
+[node name="Tooltip" type="ColorRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_vuimh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 31.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_c1kt4")
+horizontal_alignment = 1
+vertical_alignment = 1

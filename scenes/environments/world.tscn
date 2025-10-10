@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bptkema0gehhu"]
+
+[ext_resource type="PackedScene" uid="uid://bvdspvyaor3hw" path="res://scenes/environments/map.tscn" id="1_dwbse"]
+[ext_resource type="PackedScene" uid="uid://brbqu0wqeotin" path="res://scenes/vfx/tile_outline.tscn" id="2_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://b1u8aeitfgsq8" path="res://scenes/actors/player.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://w7ucpreej0io" path="res://scenes/actors/customer.tscn" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://b5ncbmkgn301w" path="res://scenes/ui/inventory/Inventory.tscn" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://mffmrhh7p8ld" path="res://scenes/entities/plants/hydrangea.tscn" id="6_ioo17"]
+[ext_resource type="PackedScene" uid="uid://drrufj0urhqx7" path="res://scenes/entities/structures/chest.tscn" id="7_ioo17"]
+[ext_resource type="Shader" uid="uid://bpdc3f3urvxgn" path="res://assets/shaders/whole_screen.gdshader" id="8_ioo17"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wse8f"]
+shader = ExtResource("8_ioo17")
+shader_parameter/time_of_day = 0.5
+shader_parameter/night_mul = Vector3(0.8, 0.84, 1)
+shader_parameter/dawn_mul = Vector3(1, 0.95, 0.92)
+shader_parameter/contrast_night = 1.02
+shader_parameter/gamma_night = 1.06
+shader_parameter/dither_strength = 0.0
+
+[node name="World" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_dwbse")]
+
+[node name="tile_outline" parent="." instance=ExtResource("2_gbfbk")]
+
+[node name="Y-Sorted" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="customer" parent="Y-Sorted" instance=ExtResource("3_aqk2v")]
+texture_filter = 1
+position = Vector2(672, 352)
+
+[node name="player" parent="Y-Sorted" node_paths=PackedStringArray("inventory") instance=ExtResource("2_tlwt5")]
+texture_filter = 1
+position = Vector2(320, 320)
+inventory = NodePath("../../CanvasLayer/Inventory")
+
+[node name="Hydrangea" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(139.64081, 144.09988)
+
+[node name="Chest" parent="Y-Sorted" instance=ExtResource("7_ioo17")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_wse8f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_dwbse")]
+mouse_filter = 1

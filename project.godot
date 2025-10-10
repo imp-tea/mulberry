@@ -17,15 +17,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-PlayerVariables="*res://scripts/player_variables.gd"
+Global="*res://scripts/autoloads/global.gd"
+PlayerVariables="*res://scripts/autoloads/player_variables.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-GameState="*res://game_state.gd"
-TileManager="*res://tile_manager.gd"
+GameState="*res://scripts/autoloads/game_state.gd"
+TileManager="*res://scripts/autoloads/tile_manager.gd"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://Dialogue/balloon.tscn"
+runtime/balloon_path="res://scenes/ui/dialogue/balloon.tscn"
 
 [display]
 
@@ -36,6 +36,18 @@ window/stretch/scale_mode="integer"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "yellow",
+"res://assets/shaders/": "purple",
+"res://data/": "pink",
+"res://dev_tools/": "gray",
+"res://resources/": "red",
+"res://scenes/": "teal",
+"res://scripts/": "blue"
+}
 
 [global_group]
 
@@ -83,7 +95,7 @@ interact={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://sample_emily.dialogue")
+locale/translations_pot_files=PackedStringArray("res://data/dialogue/sample_emily.dialogue")
 
 [rendering]
 
