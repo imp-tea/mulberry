@@ -99,8 +99,6 @@ func add_item(item: Item, amount: int) -> void:
 			item_type = "Structure"
 	elif item is Placeable:
 			item_type = "Placeable"
-	elif item is Droppable:
-			item_type = "Droppable"
 
 	# Get scene path for reinstantiation
 	var scene_path = item.scene_file_path
@@ -181,10 +179,26 @@ func drop_item_to_world(inventory_item: InventoryItem, drop_position: Vector2) -
 			push_error("Cannot drop item: no scene path stored")
 			return
 
-	# Reinstantiate the world item from its scene
-	var world_item: Item = load(inventory_item.world_scene_path).instantiate()
-	world_item.position = drop_position
-	get_tree().current_scene.add_child(world_item)
+	# Create a DroppedItem wrapper
+	var dropped_item_scene = preload("res://scenes/items/DroppedItem.tscn")
+	var dropped_item: DroppedItem = dropped_item_scene.instantiate()
+
+	# Set the dropped item's data
+	dropped_item.set_item_data(
+		inventory_item.item_name,
+		inventory_item.icon,
+		inventory_item.is_stackable,
+		1,  # Drop one at a time
+		inventory_item.item_type,
+		inventory_item.world_scene_path
+	)
+
+	# Position and add to scene
+	dropped_item.position = drop_position
+	get_tree().current_scene.add_child(dropped_item)
+
+	# Eject in random direction with bounce
+	dropped_item.eject(drop_position)
 
 	# Reduce inventory amount
 	inventory_item.amount -= 1

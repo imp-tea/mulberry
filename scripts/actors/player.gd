@@ -164,4 +164,22 @@ func _on_area_2d_area_entered(area):
 	var top_node = area.get_owner()
 	print(top_node.name)
 	if top_node in get_tree().get_nodes_in_group("pickup_items"):
-		self.inventory.add_item(top_node as Item, 1)
+		# Check if it's a DroppedItem wrapper
+		if top_node is DroppedItem:
+			var dropped_item: DroppedItem = top_node as DroppedItem
+			# Only pick up if the cooldown has expired
+			if not dropped_item.can_be_picked_up:
+				return
+
+			# Recreate the actual Item from the dropped wrapper
+			if dropped_item.world_scene_path.is_empty():
+				push_error("DroppedItem has no scene path")
+				dropped_item.queue_free()
+				return
+
+			var actual_item: Item = load(dropped_item.world_scene_path).instantiate()
+			self.inventory.add_item(actual_item, dropped_item.amount)
+			dropped_item.queue_free()
+		else:
+			# Regular Item pickup
+			self.inventory.add_item(top_node as Item, 1)
