@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://q70httxuu1ah" path="res://assets/sprites/icon.svg" id="2_qr6jv"]
 
 [sub_resource type="FontFile" id="FontFile_gs78a"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0

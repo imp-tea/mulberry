@@ -141,18 +141,18 @@ func deselect_item(new_item: InventoryItem) -> InventoryItem:
 func split_item() -> InventoryItem:
 	if self.is_empty():
 		return null
-	var inventory = self.get_parent().get_parent() # Inventory
+	var inventory = self.get_parent().get_parent() # Inventoryd
 	if self.item.amount > 1:
 		var new_item: InventoryItem = inventory_item_scene.instantiate()
 		new_item.set_data(
 			self.item.item_name, self.item.icon,
-			self.item.is_stackable, self.item.amount,
+			self.item.is_stackable, self.item.is_droppable, self.item.amount,
 			self.item.item_type, self.item.world_scene_path
 		) # Because .duplicate() is buggy (doesnt make it unique0 thats why duplicating via this way
 		new_item.amount = self.item.amount / 2
 		self.item.amount -= new_item.amount
 		inventory.add_child(new_item)
-		new_item.z_index = 129
+		new_item.z_index = 128
 		return new_item
 	elif self.item.amount == 1:
 		return self.select_item()

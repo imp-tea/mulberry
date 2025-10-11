@@ -36,30 +36,25 @@ func _ready():
 func _process(delta):
 	tooltip.global_position = get_global_mouse_position() + Vector2.ONE * 8
 	if selected_item:
-			tooltip.visible = false
-			selected_item.global_position = get_global_mouse_position()
+		tooltip.visible = false
+		selected_item.global_position = get_global_mouse_position()
 
-			# Check if item is being dragged outside inventory bounds (for dropping)
-			if Input.is_action_just_released("ui_select") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == false:
-					var mouse_pos = get_global_mouse_position()
-					var inventory_rect = inventory_grid.get_global_rect()
+		# Check if item is being dragged outside inventory bounds (for dropping)
+		if Input.is_action_just_released("ui_select") or Input.is_action_just_pressed("ui_select"):
+			var mouse_pos = get_global_mouse_position()
+			var inventory_rect = inventory_grid.get_global_rect()
 
-					# If released outside inventory area, drop the item
-					if not inventory_rect.has_point(mouse_pos):
-							if selected_item.item_type in ["Droppable", "Consumable"]:
-									# Drop at player position or mouse position in world
-									var drop_pos = PlayerVariables.position
-									drop_item_to_world(selected_item, drop_pos)
+			# If released outside inventory area, drop the item
+			if not inventory_rect.has_point(mouse_pos):
+				if selected_item.is_droppable:
+					# Drop at player position or mouse position in world
+					var drop_pos = PlayerVariables.position
+					drop_item_to_world(selected_item, drop_pos)
 
-									# Remove the item if amount is now 0
-									if selected_item.amount <= 0:
-											selected_item.queue_free()
-											selected_item = null
-
-
-
-
-
+					# Remove the item if amouAnt is now 0
+					if selected_item.amount <= 0:
+						selected_item.queue_free()
+						selected_item = null
 
 
 func _on_slot_input(which: InventorySlot, action: InventorySlot.InventorySlotAction):
@@ -111,7 +106,7 @@ func add_item(item: Item, amount: int) -> void:
 	var scene_path = item.scene_file_path
 
 	_item.set_data(
-			item.item_name, item.icon, item.is_stackable, amount, item_type, scene_path
+			item.item_name, item.icon, item.is_stackable, item.is_droppable, amount, item_type, scene_path
 	)
 	
 	item.queue_free() # Consume the item by inventory (by the end of frame)
@@ -182,9 +177,6 @@ func clear_inventory() -> void:
 
 # Drop an item from inventory into the world at specified position
 func drop_item_to_world(inventory_item: InventoryItem, drop_position: Vector2) -> void:
-	if inventory_item.item_type not in ["Droppable", "Consumable"]:
-			return  # Can't drop this type
-
 	if inventory_item.world_scene_path.is_empty():
 			push_error("Cannot drop item: no scene path stored")
 			return

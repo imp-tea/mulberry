@@ -5,6 +5,7 @@ var icon_size = Vector2(16,16)
 @export var item_name: String = ""
 @export var icon: Texture2D
 @export var is_stackable: bool = false
+@export var is_droppable: bool = true
 @onready var icon_scale:float
 
 func _ready():

@@ -36,6 +36,30 @@ texture_filter = 1
 position = Vector2(320, 320)
 inventory = NodePath("../../CanvasLayer/Inventory")
 
+[node name="Hydrangea" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(144, 208)
+
+[node name="Chest" parent="Y-Sorted" instance=ExtResource("7_ioo17")]
+position = Vector2(464, 272)
+
+[node name="Chest2" parent="Y-Sorted" instance=ExtResource("7_ioo17")]
+position = Vector2(432, 272)
+
+[node name="Hydrangea2" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(112, 208)
+
+[node name="Hydrangea3" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(80, 208)
+
+[node name="Hydrangea4" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(80, 272)
+
+[node name="Hydrangea5" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(112, 272)
+
+[node name="Hydrangea6" parent="Y-Sorted" instance=ExtResource("6_ioo17")]
+position = Vector2(144, 272)
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
@@ -50,28 +74,4 @@ mouse_filter = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_dwbse")]
-mouse_filter = 1
-
-[node name="Hydrangea" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(144, 208)
-
-[node name="Chest" parent="." instance=ExtResource("7_ioo17")]
-position = Vector2(464, 272)
-
-[node name="Chest2" parent="." instance=ExtResource("7_ioo17")]
-position = Vector2(432, 272)
-
-[node name="Hydrangea2" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(112, 208)
-
-[node name="Hydrangea3" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(80, 208)
-
-[node name="Hydrangea4" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(80, 272)
-
-[node name="Hydrangea5" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(112, 272)
-
-[node name="Hydrangea6" parent="." instance=ExtResource("6_ioo17")]
-position = Vector2(144, 272)
+mouse_default_cursor_shape = 0

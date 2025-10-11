@@ -12,11 +12,12 @@ var world_scene_path: String = ""  # Path to original scene for reinstantiation
 
 
 # Replace the set_data function:
-func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _amount: int, _type: String = "Item", _scene_path: String = ""):
+func set_data(_name: String, _icon: Texture2D, _is_stackable: bool, _is_droppable: bool, _amount: int, _type: String = "Item", _scene_path: String = ""):
 	self.item_name = _name
 	self.name = _name
 	self.icon = _icon
 	self.is_stackable = _is_stackable
+	self.is_droppable = _is_droppable
 	self.amount = _amount
 	self.item_type = _type
 	self.world_scene_path = _scene_path

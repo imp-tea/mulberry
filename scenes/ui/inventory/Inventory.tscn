@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_xjbm4")
 cols = 9
 inventory_grid = NodePath("GridContainer")
@@ -29,6 +30,7 @@ offset_top = -64.0
 offset_right = 32.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_default_cursor_shape = 2
 columns = 9
 
 [node name="Tooltip" parent="." instance=ExtResource("2_orgsn")]
